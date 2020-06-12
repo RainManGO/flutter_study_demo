@@ -1,6 +1,14 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_study_demo/page/part_3/state_manager.dart';
+import 'package:flutter_study_demo/page/part_3/stateful_wedget.dart';
 import 'package:flutter_study_demo/page/router/new_router.dart';
 import 'package:flutter_study_demo/page/router/param_router.dart';
+import 'package:flutter_study_demo/page/widget/From_TextField_demo.dart';
+import 'package:flutter_study_demo/page/widget/TextDemo.dart';
+import 'package:flutter_study_demo/page/widget/button_demo.dart';
+import 'package:flutter_study_demo/page/widget/checkBox_demo.dart';
+import 'package:flutter_study_demo/page/widget/image_demo.dart';
 import 'package:flutter_study_demo/page/widget/page_scaffold.dart';
 
 void main() => runApp(MyApp());
@@ -24,6 +32,22 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(),
+      routes: {
+        "new_router": (context) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text("命名路由跳转"),
+            ),
+            body: NewRouter(),
+          );
+        },
+      },
+      onGenerateRoute: (RouteSettings settings) {
+        print("onGenerateRoute");
+        return MaterialPageRoute(builder: (context) {
+          return NewRouter();
+        });
+      },
     );
   }
 }
@@ -58,11 +82,30 @@ class _MyHomePageState extends State<MyHomePage> {
                   paramString: "这是传过去的值",
                 );
               }));
-              print("$result");
               setState(() {
-                resultPopString = result;
+                resultPopString = result ?? "当前没有参数";
               });
             },
+          ),
+          ListTile(
+            title: Text("命名路由跳转"),
+            trailing: Icon(Icons.arrow_right),
+            onTap: () =>
+                Navigator.pushNamed(context, "new_router", arguments: "hi"),
+          ),
+          ExpansionTile(
+            title: Text("Wedget"),
+            children: _generateItem(context, [
+              PageInfo(
+                  "获取StateFul Wedget的State", (context) => SonGetStatePage()),
+              PageInfo("State 状态Widget自己管理", (context) => TapBoxA()),
+              PageInfo("State 状态父Widget管理", (context) => ParentWidget()),
+              PageInfo("Text 小部件", (context) => TextDemoPage()),
+              PageInfo("Button 小部件", (context) => ButtonDemoPage()),
+              PageInfo("Image 小部件", (context) => ImageDemoPage()),
+              PageInfo("选择框 小部件", (context) => CheckBox()),
+              PageInfo("表单部件", (context) => FromTextFieldWidget()),
+            ]),
           ),
         ],
       ),
