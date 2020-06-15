@@ -5,6 +5,7 @@ import 'package:flutter_study_demo/page/part_3/stateful_wedget.dart';
 import 'package:flutter_study_demo/page/router/new_router.dart';
 import 'package:flutter_study_demo/page/router/param_router.dart';
 import 'package:flutter_study_demo/page/widget/From_TextField_demo.dart';
+import 'package:flutter_study_demo/page/widget/ProgressIndicator_demo.dart';
 import 'package:flutter_study_demo/page/widget/TextDemo.dart';
 import 'package:flutter_study_demo/page/widget/button_demo.dart';
 import 'package:flutter_study_demo/page/widget/checkBox_demo.dart';
@@ -105,6 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
               PageInfo("Image 小部件", (context) => ImageDemoPage()),
               PageInfo("选择框 小部件", (context) => CheckBox()),
               PageInfo("表单部件", (context) => FromTextFieldWidget()),
+              PageInfo("滑动指示器", (context) => ProgressIndicatorWidget()),
             ]),
           ),
         ],
